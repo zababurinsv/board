@@ -1,0 +1,62 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "description": "template",
+  "main": "server.mjs",
+  "directories": {
+    "doc": "template"
+  },
+  "scripts": {
+    "template": "nodemon server.mjs",
+    "start": "node server.mjs",
+    "build": "gulp gulp-bundle",
+    "build-bundle": "webpack --config webpack.config.js",
+    "kill:3070": "kill $(lsof -t -i:3070)",
+    "gulp-watch-slyle": "gulp gulp-watch-slyle",
+    "gitHub": "git status && git add -A && git commit -am 'update' && git push",
+    "kill:xxxx": "kill $(lsof -t -i:xxxx)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zababurinsv/template.git"
+  },
+  "keywords": [
+    "game"
+  ],
+  "author": "Zababurin Sergey",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/zababurinsv/template/issues"
+  },
+  "homepage": "https://github.com/zababurinsv/template#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "enqueue": "^1.0.2",
+    "express": "^4.17.1",
+    "express-enqueue": "^1.0.0",
+    "ipfs": "^0.50.2",
+    "mongoose": "5.10.5",
+    "orbit-db": "^0.26.0-rc2",
+    "webdav": "^3.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/register": "^7.11.5",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1",
+    "nodemon": "^2.0.4",
+    "plugin-error": "^1.0.1",
+    "through2": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "yargs": "^16.0.3"
+  }
+}

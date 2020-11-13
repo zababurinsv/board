@@ -1,0 +1,57 @@
+@import "/home/sergey/Desktop/telegram/css/fonts_new.scss";
+@import "/home/sergey/Desktop/telegram/css/util/media_new.scss";
+@mixin touch {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                 not supported by any browser */
+}
+
+section{
+  @include touch;
+  display: flex;
+  padding: 0;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 2vw;
+  margin-top: 8vw;
+  position: relative;
+  justify-content: center;
+  div.leftGraphic{
+    min-width: 25vw;
+    position: absolute;
+    top: 62%;
+    left: 0%;
+    transform: scale(0.9);
+
+  }
+  div.center{
+    @include touch;
+    z-index: 77;
+    max-width: 49vw;
+    font-size: 6vw;
+    color: #232f62;
+    border-radius: 1vw;
+    text-transform: uppercase;
+    width: 52vw;
+    text-align: center;
+    margin: 0;;
+    border: none;
+    p{
+      @include fonts(16);
+      font-family: Roboto, serif;
+      box-sizing: border-box;
+      padding: 0;
+    }
+  }
+
+  div.rightGraphic{
+    position: absolute;
+    right: 0%;
+    top: 74%;
+    min-width: 25vw;
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Faucet</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<body>
+  <div id="components">
+  
+  </div>
+</body>
+<script type="module">
+    import emoji from '/static/html/components/component_modules/emoji/emoji.mjs'
+    import white from '/static/html/components/component_modules/white/white.mjs'
+    import events from '/static/html/components/component_modules/CustomEvent/index.mjs'
+    import iframe from '/static/html/components/component_modules/iframe/iframe.mjs'
+    import isEmpty from '/static/html/components/component_modules/isEmpty/isEmpty_t.mjs'
+    let verifyOpener = false
+
+    try{ isEmpty(window.opener) }catch (e) { verifyOpener = true }
+    if(verifyOpener){
+        window.opener.postMessage('init','*')
+    }
+    window.addEventListener ("message", async (event) => {
+        if(white.includes(event.origin)){
+            if(location.origin !== event.origin){
+                iframe.setPort2(event.origin, event.ports[0],async (event)=>{
+                    console.log(`<<<<<1 request waves-game ${emoji('fire')}`, event.data.property)
+                    let response = await events.customEvent(event.data.view,event.data.property,event.data.color,event.data.substrate,event.data.relation)
+                    iframe.getPort2(event.data.property, event.data.window).postMessage({
+                        view:true,
+                        propery:`${emoji('fire')} waves-game response >>>>>`,
+                        color:event.data.color,
+                        substrate:{},
+                        relation:event.data.relation
+                    })
+                }, event.data.window)
+                console.log(`<<<<<2 request waves-game ${emoji('fire')}`,event.data)
+                if(event.data.window === true){
+                    iframe.getPort2(event.origin, event.data.window).postMessage(
+
+                        `${emoji('fire')} init response end >>>>>`
+                    );
+                }else{
+                    let response = await events.customEvent(event.data.view,event.data.property,event.data.color,event.data.substrate,event.data.relation)
+                    iframe.getPort2(event.origin, event.data.window).postMessage({
+                        view:true,
+                        propery:`${emoji('fire')} waves-game response >>>>>`,
+                        color:event.data.color,
+                        substrate:{},
+                        relation:event.data.relation
+                    });
+                }
+            }
+        }
+    })
+</script>
+<style>
+    body{
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+    }
+</style>
+</html>
