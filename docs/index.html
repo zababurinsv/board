@@ -1,22 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <title>xArt</title>
+    <title>Monopoly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+    <meta property="og:site_name" content="markdown"/>
+    <meta property="og:locale" content="ru_RU"/>
+    <meta property="og:type" content="contract"/>
+    <meta property="og:title" content="markdown"/>
+    <meta property="og:description" content="markdown"/>
+    <meta property="og:url" content="https://zababurinsv.github.io/ide-design/"/>
+    <meta property="og:image" content="https://i.imgur.com/pSrPUkJ.jpg"/>
+    <meta property="og:image:width" content="537"/>
+    <meta property="og:image:height" content="240"/>
+    <meta name="theme-color" content="white"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Hello World">
+    <meta name="msapplication-TileImage" content="images/hello-icon-144.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <link rel="manifest" crossorigin="use-credentials" href="manifest.json"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/images/manifest/index/hello-icon-152.png">
+    <script src="/static/html/components/component_modules/mocha/mocha.js" defer></script>
 </head>
 <body>
-<section class="component">
-    <varan-header preset="index"></varan-header>
-    <hr>
-    <div id="components">
-        <manager-board preset="index"></manager-board>
-    </div>
-    <hr>
-    <varan-footer preset="index"></varan-footer>
-</section>
+<noscript>
+
+</noscript>
+<varan-header preset="index"></varan-header>
+<div id="components">
+    <manager-board preset="index"></manager-board>
+</div>
+<varan-footer preset="index"></varan-footer>
+<div id="tests">
+    <ul id="mocha"></ul>
+</div>
 </body>
 <script type="module" src="/static/html/components/varan-header/varan-header.mjs" async></script>
 <script type="module" src="/static/html/components/varan-footer/varan-footer.mjs" async></script>
 <script type="module" src="/static/html/components/manager-board/manager-board.mjs" async></script>
+<script type="module">
+  import UA from '/static/html/components/component_modules/bundle/ua/ua.index.mjs'
+  import tests from  '/static/html/components/component_modules/tests/tests.mjs'
+  // import client from '/static/html/components/component_modules/client_reverse/client_reverse.mjs'
+  let sys = {
+    init:true,
+    test: true
+  }
+  function test(state){
+    if(state) {
+      let setup =  mocha.setup('bdd')
+      console.log('mocha', setup)
+      tests()
+    }
+    return true
+  }
+  function init(status){
+    return new Promise((resolve,reject)=>{
+      if(status) {
+        let element = document.createElement('script')
+        element.src = '/static/html/components/component_modules/eruda/eruda.js'
+        document.head.append(element);
+        element.onload = () => {
+          let element = document.createElement('script')
+          element.src = '/static/html/components/component_modules/eruda/eruda-dom.js'
+          document.head.append(element);
+          element.onload = () => {
+            eruda.init({
+              tool: ['console', 'elements']
+            });
+            eruda.add(erudaDom);
+            resolve(true)
+          }
+        };
+      }
+    })
+  }
+  let userAgent = new UA['default']['user-agent']
+  let type = userAgent.getResult().device.type
+  console.log('user-agent', JSON.stringify(userAgent.getResult(), null, 2));
+  if(type === 'tablet' || type === 'mobile') {
+    init(true).then(()=>{
+      test(sys.test)
+    })
+  } else {
+    test(sys.test)
+  }
+  window.onload = ()=> {
+    'use strict';
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  }
+  /*
+    client.system()
+      .then((system)=>{
+        console.log('@@@@@@ system @@@@@@', system)
+        let sys = {
+          port: 9876,
+          localhost: `localhost:9876`,
+          wstunHost: 'ws://localhost:5000'
+        }
+        system.start('5005', sys.wstunHost, sys.localhost);
+    })
+   */
+</script>
+<style> @import url("/css/index.css");</style>
 </html>
