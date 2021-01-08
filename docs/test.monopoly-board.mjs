@@ -5,7 +5,7 @@ import isEmpty from '/static/html/components/component_modules/isEmpty/isEmpty.m
 describe('Monopoly', async function () {
   this.timeout(10000);
   before(async function () {
-    console.log('emoji', emoji('moon'))
+    // console.log('emoji', emoji('moon'))
   });
   describe('case №1', async function () {
     it('case №1 action 1', function () {
