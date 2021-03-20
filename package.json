@@ -7,7 +7,7 @@
     "doc": "contract-deals"
   },
   "scripts": {
-    "git_monopoly_board": "git status && git add -A && git commit -am 'update' && git push"
+    "git_board": "git status && git add -A && git commit -am 'update' && git push"
   },
   "repository": {
     "type": "git",
